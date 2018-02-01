@@ -1,5 +1,8 @@
 package be.pxl.ccelen.myfridge_cocktails;
 
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsInstanceOf;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="be.pxl.ccelen.myfridge_cocktails.MainActivity">
+    tools:context="be.pxl.ccelen.myfridge_cocktails.AllCocktailsActivity">
 
-
-
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_cocktails"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Welcome to myFridge"/>
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+
 
 </FrameLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="cocktail"
+            type="be.pxl.ccelen.myfridge_cocktails.data.Cocktail"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_cocktailThumb"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_toLeftOf="@id/tv_cocktailName"
+            android:contentDescription="CocktailThumb"
+            />
+
+        <TextView
+            android:id="@+id/tv_cocktailName"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_toRightOf="@id/tv_cocktailName"
+            android:text="@{cocktail.name}"/>
+    </RelativeLayout>
+
+
+</layout>
