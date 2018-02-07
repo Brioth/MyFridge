@@ -7,6 +7,7 @@ import android.databinding.ObservableList;
 import android.view.View;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import be.pxl.ccelen.myfridge_cocktails.BR;
@@ -15,24 +16,24 @@ import be.pxl.ccelen.myfridge_cocktails.BR;
  * Created by Ik on 28/01/2018.
  */
 
-public class DrinksResult extends BaseObservable{
-    private ObservableArrayList<Cocktail> drinks;
+public class DrinksResult{
+    private List<Cocktail> drinks;
 
-    public DrinksResult(){
-        drinks = new ObservableArrayList<>();
+    public DrinksResult()
+    {
+        drinks = new ArrayList<>();
     }
 
     public void add(Cocktail cocktail){
         drinks.add(cocktail);
     }
 
-    @Bindable
-    public ObservableArrayList<Cocktail> getDrinks() {
+
+    public List<Cocktail> getDrinks() {
         return drinks;
     }
 
-    public void setDrinks(ObservableArrayList<Cocktail> drinks){
+    public void setDrinks(List<Cocktail> drinks){
         this.drinks = drinks;
-        notifyPropertyChanged(BR.drinks);
     }
 }

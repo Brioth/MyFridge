@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_random:
                 intent = new Intent(this, RandomCocktailActivity.class);
                 break;
+            case R.id.action_all:
+                intent = new Intent(this, AllCocktailsActivity.class);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }

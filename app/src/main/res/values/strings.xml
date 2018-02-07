@@ -3,4 +3,5 @@
 
 
     <string name="randomUrl">"http://www.thecocktaildb.com/api/json/v1/1/random.php"</string>
+    <string name="alcoholicUrl">"http://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic"</string>
 </resources>

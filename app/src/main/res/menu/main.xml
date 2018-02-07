@@ -11,4 +11,9 @@
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
         android:title="Random Cocktail"/>
+    <item
+        android:id="@+id/action_all"
+        android:orderInCategory="3"
+        app:showAsAction="ifRoom"
+        android:title="All Alcoholic cocktails"/>
 </menu>

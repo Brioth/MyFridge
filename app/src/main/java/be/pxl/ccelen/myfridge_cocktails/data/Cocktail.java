@@ -14,10 +14,7 @@ import be.pxl.ccelen.myfridge_cocktails.BR;
  * Created by Ik on 27/01/2018.
  */
 
-public class Cocktail implements Observable{
-
-    private PropertyChangeRegistry registry =
-            new PropertyChangeRegistry();
+public class Cocktail{
 
     @SerializedName("idDrink")
     private String id;
@@ -63,25 +60,17 @@ public class Cocktail implements Observable{
 
     }
 
-    @Bindable
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-        registry.notifyChange(this, BR.id);
-    }
+    public void setId(String id){this.id = id;}
 
-    @Bindable
     public String getName() {
         return name;
     }
 
-    public void setName(String name){
-        this.name = name;
-        registry.notifyChange(this, BR.name);
-    }
+    public void setName(String name){this.name = name;}
 
 
     public String getStrCategory() {
@@ -170,15 +159,5 @@ public class Cocktail implements Observable{
 
     public void setStrMeasure3(String strMeasure3) {
         this.strMeasure3 = strMeasure3;
-    }
-
-    @Override
-    public void addOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        registry.add(callback);
-    }
-
-    @Override
-    public void removeOnPropertyChangedCallback(OnPropertyChangedCallback callback) {
-        registry.remove(callback);
     }
 }
