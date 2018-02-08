@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import be.pxl.ccelen.myfridge_cocktails.data.Cocktail;
@@ -80,11 +81,13 @@ public class CocktailFindByIngredientFragment extends Fragment implements Spinne
             Log.d(TAG, "onIngredientsLoaded response: " + response);
 
             try{
+                ingredients.clear();
                 JSONObject jsonObject = new JSONObject(response);
                 JSONArray jsonArray = jsonObject.getJSONArray("drinks");
                 for (int i = 0; i<jsonArray.length(); i++){
                     JSONObject ingredient = jsonArray.getJSONObject(i);
                     ingredients.add(ingredient.getString("strIngredient1"));
+                    Collections.sort(ingredients, String.CASE_INSENSITIVE_ORDER);
                 }
 
             } catch (JSONException e){

@@ -38,7 +38,7 @@ public class CocktailAdapter extends RecyclerView.Adapter<CocktailViewHolder> {
 
     @Override
     public void onBindViewHolder(CocktailViewHolder holder, int position) {
-        holder.nameTextView.setText("Name: "+ cocktailList.get(position).getName());
+        holder.nameTextView.setText(cocktailList.get(position).getName());
 
         String thumbUrl = "http://" + cocktailList.get(position).getThumbUrl();
         ImageLoader imageLoader = MySingleton.getInstance(mContext).getImageLoader();

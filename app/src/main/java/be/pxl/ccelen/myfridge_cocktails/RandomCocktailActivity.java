@@ -50,8 +50,6 @@ public class RandomCocktailActivity extends BaseActivity {
 
         getRandomCocktail();
 
-
-
         final Button button = findViewById(R.id.bt_newRandom);
         button.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

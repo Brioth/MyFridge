@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50sp"
-    android:orientation="horizontal"
-    android:gravity="right">
-
-    <TextView
-        android:id="@+id/tv_cocktailName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Name of the cocktail placeholder"/>
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/iv_cocktailThumb"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:src="@drawable/ic_launcher_foreground"/>
+
+    <TextView
+        android:id="@+id/tv_cocktailName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:textSize="20sp"
+        android:paddingTop="5dp"
+        />
 
 </LinearLayout>
