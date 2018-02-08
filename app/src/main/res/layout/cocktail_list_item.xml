@@ -11,5 +11,10 @@
         android:layout_height="wrap_content"
         android:text="Name of the cocktail placeholder"/>
 
+    <com.android.volley.toolbox.NetworkImageView
+        android:id="@+id/iv_cocktailThumb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_foreground"/>
 
 </LinearLayout>

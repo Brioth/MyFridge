@@ -3,28 +3,16 @@ package be.pxl.ccelen.myfridge_cocktails;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import be.pxl.ccelen.myfridge_cocktails.data.Cocktail;
 import be.pxl.ccelen.myfridge_cocktails.data.DrinksResult;
-import be.pxl.ccelen.myfridge_cocktails.utilities.MySingleton;
 
 public class AllCocktailsActivity extends AppCompatActivity {
     private String TAG = "AllCocktailsActivityError";

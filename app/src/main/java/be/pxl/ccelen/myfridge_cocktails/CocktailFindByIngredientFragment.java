@@ -2,6 +2,8 @@ package be.pxl.ccelen.myfridge_cocktails;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,44 +19,32 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-import be.pxl.ccelen.myfridge_cocktails.data.DrinksResult;
+import be.pxl.ccelen.myfridge_cocktails.data.Cocktail;
 import be.pxl.ccelen.myfridge_cocktails.utilities.MySingleton;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class CocktailFindByIngredientFragment extends Fragment implements Spinner.OnItemSelectedListener{
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
-    private static final String TAG = "IngredientsFragment";
+
+    private static final String filteredBaseUrl = "http://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
+    private static final String TAG = CocktailFindByIngredientFragment.class.getName();
 
     private Spinner spinner;
     private ArrayList<String> ingredients;
-    private JSONArray result;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private CocktailAdapter adapter;
 
     public CocktailFindByIngredientFragment() {
-    }
-
-    /**
-     * Returns a new instance of this fragment for the given section
-     * number.
-     */
-    public static CocktailFindByIngredientFragment newInstance(int sectionNumber) {
-        CocktailFindByIngredientFragment fragment = new CocktailFindByIngredientFragment();
-        Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -69,6 +59,11 @@ public class CocktailFindByIngredientFragment extends Fragment implements Spinne
 
         fillIngredients();
 
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.rv_findByIngredient);
+        //recyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
+        layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+
         return rootView;
     }
 
@@ -82,16 +77,22 @@ public class CocktailFindByIngredientFragment extends Fragment implements Spinne
     private final Response.Listener<String> onIngredientsLoaded = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            Log.d(TAG, "onResponse: " + response);
+            Log.d(TAG, "onIngredientsLoaded response: " + response);
 
-            JSONObject j = null;
             try{
-                j = new JSONObject(response);
-                result = j.getJSONArray("drinks");
-                getIngredients(result);
+                JSONObject jsonObject = new JSONObject(response);
+                JSONArray jsonArray = jsonObject.getJSONArray("drinks");
+                for (int i = 0; i<jsonArray.length(); i++){
+                    JSONObject ingredient = jsonArray.getJSONObject(i);
+                    ingredients.add(ingredient.getString("strIngredient1"));
+                }
+
             } catch (JSONException e){
                 e.printStackTrace();
             }
+
+            spinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, ingredients));
+
         }
     };
 
@@ -102,27 +103,49 @@ public class CocktailFindByIngredientFragment extends Fragment implements Spinne
         }
     };
 
-    private void getIngredients(JSONArray j){
-        for (int i=0; i<j.length(); i++){
-            try{
-                JSONObject json = j.getJSONObject(i);
-                ingredients.add(json.getString("strIngredient1"));
-            } catch (JSONException e){
-                e.printStackTrace();
-            }
-        }
-
-        spinner.setAdapter(new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_dropdown_item, ingredients));
-
-    }
-
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        //TODO
+        String ingredient = spinner.getSelectedItem().toString();
+        Log.d(TAG, "onItemSelected: " + ingredient);
+        requestFilteredCocktails(ingredient);
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         //TODO
+    }
+
+    private void requestFilteredCocktails(String ingredient){
+        String url = filteredBaseUrl + ingredient;
+        StringRequest request = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "onFilteredloaded response: " + response);
+
+                List<Cocktail> cocktails = new ArrayList<Cocktail>();
+
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    JSONArray jsonArray = jsonObject.getJSONArray("drinks");
+                    for (int i = 0; i<jsonArray.length(); i++) {
+                        String json = jsonArray.getString(i);
+                        Gson gson = new Gson();
+                        Cocktail cocktail = gson.fromJson(json, Cocktail.class);
+                        cocktails.add(cocktail);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                adapter = new CocktailAdapter(getContext(), cocktails);
+                recyclerView.setAdapter(adapter);
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.d(TAG, "Error "+ volleyError.getMessage());
+            }
+        });
+        MySingleton.getInstance(getContext()).addToRequestQueue(request);
     }
 }
