@@ -1,14 +1,7 @@
 package be.pxl.ccelen.myfridge_cocktails.data;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.Observable;
-import android.databinding.PropertyChangeRegistry;
-import android.util.Log;
-
 import com.google.gson.annotations.SerializedName;
 
-import be.pxl.ccelen.myfridge_cocktails.BR;
 
 /**
  * Created by Ik on 27/01/2018.

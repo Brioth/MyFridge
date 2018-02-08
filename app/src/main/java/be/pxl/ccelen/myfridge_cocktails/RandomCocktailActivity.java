@@ -1,6 +1,7 @@
 package be.pxl.ccelen.myfridge_cocktails;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -24,7 +25,7 @@ import be.pxl.ccelen.myfridge_cocktails.data.Cocktail;
 import be.pxl.ccelen.myfridge_cocktails.data.DrinksResult;
 import be.pxl.ccelen.myfridge_cocktails.utilities.MySingleton;
 
-public class RandomCocktailActivity extends AppCompatActivity {
+public class RandomCocktailActivity extends BaseActivity {
 
     private static final String TAG = "RandomCocktailActivity";
     private TextView cocktailName;
@@ -71,7 +72,7 @@ public class RandomCocktailActivity extends AppCompatActivity {
         public void onResponse(String response) {
             drinks = gson.fromJson(response, DrinksResult.class);
             cocktail = drinks.getDrinks().get(0);
-            String thumbUrl = cocktail.getThumbUrl();
+            String thumbUrl = "http://" + cocktail.getThumbUrl();
 
             cocktailName.setText(cocktail.getName());
             ImageLoader imageLoader = MySingleton.getInstance(getApplicationContext()).getImageLoader();
@@ -88,15 +89,4 @@ public class RandomCocktailActivity extends AppCompatActivity {
     };
 
 
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return super.onOptionsItemSelected(item);
-    }
 }

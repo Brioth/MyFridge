@@ -1,16 +1,8 @@
 package be.pxl.ccelen.myfridge_cocktails.data;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.ObservableArrayList;
-import android.databinding.ObservableList;
-import android.view.View;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
-import be.pxl.ccelen.myfridge_cocktails.BR;
 
 /**
  * Created by Ik on 28/01/2018.

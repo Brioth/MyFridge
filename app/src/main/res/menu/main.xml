@@ -2,18 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_home"
+        android:id="@+id/action_cocktails"
         android:orderInCategory="1"
-        app:showAsAction="always"
-        android:title="Home" />
+        app:showAsAction="ifRoom"
+        android:title="Cocktails"/>
     <item
-        android:id="@+id/action_random"
+        android:id="@+id/action_cupboard"
         android:orderInCategory="2"
         app:showAsAction="ifRoom"
-        android:title="Random Cocktail"/>
+        android:title="Cupboard"
+        />
     <item
-        android:id="@+id/action_all"
+        android:id="@+id/action_random"
         android:orderInCategory="3"
         app:showAsAction="ifRoom"
-        android:title="All Alcoholic cocktails"/>
+        android:title="Random Cocktail"/>
+
 </menu>
